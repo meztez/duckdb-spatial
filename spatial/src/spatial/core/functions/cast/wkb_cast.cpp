@@ -63,6 +63,10 @@ void CoreCastFunctions::RegisterWKBCasts(DatabaseInstance &db) {
 	    db, GeoTypes::WKB_BLOB(), GeoTypes::GEOMETRY(),
 	    BoundCastInfo(WKBToGeometryCast, nullptr, GeometryFunctionLocalState::InitCast));
 
+	ExtensionUtil::RegisterCastFunction(
+	    db, LogicalType::BLOB, GeoTypes::GEOMETRY(),
+	    BoundCastInfo(WKBToGeometryCast, nullptr, GeometryFunctionLocalState::InitCast));
+
 	// WKB -> BLOB is implicitly castable
 	ExtensionUtil::RegisterCastFunction(db, GeoTypes::WKB_BLOB(), LogicalType::BLOB, DefaultCasts::ReinterpretCast, 1);
 
